@@ -16,159 +16,159 @@ import React, { useState } from "react"
 const courses = [
   {
     id: 1,
-    title: "Complete Full-Stack Web Development",
-    category: "Web Development",
-    instructor: "Sarah Johnson",
+    title: "Venture Capital & Fundraising Masterclass",
+    category: "Fundraising",
+    instructor: "Jessica Miles",
     rating: 4.9,
-    students: 2847,
-    duration: "40 hours",
-    level: "Beginner",
-    price: "$199",
-    image: "https://plus.unsplash.com/premium_photo-1661763874747-405eb7388c58?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dHJhaW5pbmd8ZW58MHx8MHx8fDA%3D",
-    videoId: "https://youtu.be/HAnw168huqA",
-    description: "Master modern web development with React, Node.js, and MongoDB",
+    students: 1280,
+    duration: "25 hours",
+    level: "Intermediate",
+    price: "$299",
+    image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80",
+    videoId: "N8_p8nQ5s_E",
+    description: "Master the art of fundraising, from crafting your pitch to negotiating term sheets with top VCs.",
   },
   {
     id: 2,
-    title: "Data Science & Machine Learning",
-    category: "Data Science",
-    instructor: "Dr. Michael Chen",
+    title: "Lean Startup & MVP Development",
+    category: "Product",
+    instructor: "Alex Chen",
     rating: 4.8,
-    students: 1923,
-    duration: "60 hours",
-    level: "Intermediate",
-    price: "$299",
-    image: "https://plus.unsplash.com/premium_photo-1661763874747-405eb7388c58?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dHJhaW5pbmd8ZW58MHx8MHx8fDA%3D",
-    videoId: "https://youtu.be/HAnw168huqA",
-    description: "Learn Python, pandas, scikit-learn, and advanced analytics",
+    students: 2150,
+    duration: "30 hours",
+    level: "Beginner",
+    price: "$199",
+    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+    videoId: "fZSF82PMq_c",
+    description: "Learn to build, measure, and learn. Validate your idea and build products customers actually want.",
   },
   {
     id: 3,
-    title: "Digital Marketing Mastery",
-    category: "Marketing",
-    instructor: "Emma Rodriguez",
+    title: "Growth Hacking for Startups",
+    category: "Growth",
+    instructor: "Ben Carter",
     rating: 4.9,
-    students: 3156,
-    duration: "25 hours",
-    level: "Beginner",
-    price: "$149",
-    image: "https://plus.unsplash.com/premium_photo-1661763874747-405eb7388c58?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dHJhaW5pbmd8ZW58MHx8MHx8fDA%3D",
-    videoId: "n4_7p5IeN-o",
-    description: "Complete guide to SEO, social media, and paid advertising",
+    students: 3105,
+    duration: "40 hours",
+    level: "All Levels",
+    price: "$249",
+    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+    videoId: "f_p54H1_w2g",
+    description: "Acquire users at scale with proven growth strategies used by top Silicon Valley startups.",
   },
   {
     id: 4,
-    title: "AWS Cloud Architecture",
-    category: "Cloud Computing",
-    instructor: "James Wilson",
+    title: "Startup Financial Modeling & Forecasting",
+    category: "Operations",
+    instructor: "Maria Garcia",
     rating: 4.7,
-    students: 1654,
-    duration: "35 hours",
+    students: 980,
+    duration: "20 hours",
     level: "Advanced",
-    price: "$249",
-    image: "https://plus.unsplash.com/premium_photo-1661763874747-405eb7388c58?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dHJhaW5pbmd8ZW58MHx8MHx8fDA%3D",
-    videoId: "SOTam2s3_iQ",
-    description: "Design scalable cloud solutions with AWS services",
+    price: "$279",
+    image: "https://images.unsplash.com/photo-1554224155-1696413565d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+    videoId: "8m_3XaHiEpc",
+    description: "Build a solid financial model to manage your burn rate, forecast revenue, and impress investors.",
   },
   {
     id: 5,
-    title: "UI/UX Design Fundamentals",
-    category: "Design",
-    instructor: "Lisa Park",
+    title: "Building a High-Performance Team",
+    category: "Operations",
+    instructor: "David Lee",
     rating: 4.8,
-    students: 2341,
-    duration: "30 hours",
-    level: "Beginner",
+    students: 1543,
+    duration: "15 hours",
+    level: "Intermediate",
     price: "$179",
-    image: "https://plus.unsplash.com/premium_photo-1661763874747-405eb7388c58?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dHJhaW5pbmd8ZW58MHx8MHx8fDA%3D",
-    videoId: "cKZEgtadwlg",
-    description: "Create beautiful and user-friendly digital experiences",
+    image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1587&q=80",
+    videoId: "uI9T0C_we_A",
+    description: "Learn how to hire, manage, and retain A-player talent for your early-stage startup.",
   },
   {
     id: 6,
-    title: "Cybersecurity Essentials",
-    category: "Security",
-    instructor: "Robert Davis",
-    rating: 4.6,
-    students: 987,
-    duration: "45 hours",
-    level: "Intermediate",
-    price: "$229",
-    image: "https://plus.unsplash.com/premium_photo-1661763874747-405eb7388c58?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dHJhaW5pbmd8ZW58MHx8MHx8fDA%3D",
-    videoId: "_3mW3poaTGM",
-    description: "Protect systems and data from cyber threats",
+    title: "Startup Legal Essentials",
+    category: "Legal",
+    instructor: "Rachel Kim",
+    rating: 4.9,
+    students: 1890,
+    duration: "10 hours",
+    level: "Beginner",
+    price: "$149",
+    image: "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+    videoId: "5iUhzS6_D_A",
+    description: "Navigate incorporation, IP, and equity distribution with confidence. Avoid common legal pitfalls.",
   },
 ]
 
 const learningPaths = [
   {
-    title: "Become a Full-Stack Developer",
-    description: "Complete roadmap from beginner to professional full-stack developer",
-    courses: 6,
-    duration: "6 months",
-    image: "https://plus.unsplash.com/premium_photo-1661763874747-405eb7388c58?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dHJhaW5pbmd8ZW58MHx8MHx8fDA%3D",
-    videoId: "ber_pA9yO_Y",
-  },
-  {
-    title: "Data Science Career Track",
-    description: "Master data analysis, machine learning, and statistical modeling",
-    courses: 8,
-    duration: "8 months",
-    image: "https://plus.unsplash.com/premium_photo-1661763874747-405eb7388c58?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dHJhaW5pbmd8ZW58MHx8MHx8fDA%3D",
-    videoId: "X3paOmcrTjQ",
-  },
-  {
-    title: "Digital Marketing Professional",
-    description: "Comprehensive marketing skills for the digital age",
+    title: "The Pre-Seed Founder",
+    description: "From idea validation to your first funding round. Everything you need to get started.",
     courses: 5,
     duration: "4 months",
-    image: "https://plus.unsplash.com/premium_photo-1661763874747-405eb7388c58?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dHJhaW5pbmd8ZW58MHx8MHx8fDA%3D",
-    videoId: "n4_7p5IeN-o",
+    image: "https://images.unsplash.com/photo-1543269664-56d93c1b41a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+    videoId: "R_MbiC-4h_w",
+  },
+  {
+    title: "The Growth Stage Playbook",
+    description: "Master the strategies to scale your user base, revenue, and team from Series A and beyond.",
+    courses: 8,
+    duration: "8 months",
+    image: "https://images.unsplash.com/photo-1543269664-56d93c1b41a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+    videoId: "TQSeiR_ig2k",
+  },
+  {
+    title: "The Solo-Founder Track",
+    description: "A comprehensive guide for building a profitable business without a co-founder or VC funding.",
+    courses: 6,
+    duration: "6 months",
+    image: "https://images.unsplash.com/photo-1543269664-56d93c1b41a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+    videoId: "L_AcrbjSg2A",
   },
 ]
 
 const instructors = [
   {
-    name: "Sarah Johnson",
-    title: "Senior Full-Stack Developer",
-    company: "Google",
-    image: "https://plus.unsplash.com/premium_photo-1661763874747-405eb7388c58?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dHJhaW5pbmd8ZW58MHx8MHx8fDA%3D",
+    name: "Jessica Miles",
+    title: "Managing Partner",
+    company: "Catalyst Ventures",
+    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
     videoId: "ewE5zMA8j_c",
-    bio: "10+ years building scalable web applications",
+    bio: "Led over 50 early-stage investments, with 5 unicorns in her portfolio.",
   },
   {
-    name: "Dr. Michael Chen",
-    title: "Lead Data Scientist",
-    company: "Microsoft",
-    image: "https://plus.unsplash.com/premium_photo-1661763874747-405eb7388c58?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dHJhaW5pbmd8ZW58MHx8MHx8fDA%3D",
+    name: "Alex Chen",
+    title: "Serial Entrepreneur & YC Alum",
+    company: "Founder of Innovate.io",
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1587&q=80",
     videoId: "T-d_4l9zo4A",
-    bio: "PhD in Machine Learning, published researcher",
+    bio: "Built and sold two tech startups for a combined $200M. Passionate about product.",
   },
   {
-    name: "Emma Rodriguez",
-    title: "Digital Marketing Director",
-    company: "Meta",
-    image: "https://plus.unsplash.com/premium_photo-1661763874747-405eb7388c58?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dHJhaW5pbmd8ZW58MHx8MHx8fDA%3D",
+    name: "Ben Carter",
+    title: "Former Head of Growth",
+    company: "ScaleUp Inc.",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1587&q=80",
     videoId: "eZzE9m90-2g",
-    bio: "Grew multiple brands to 7-figure revenue",
+    bio: "Grew ScaleUp's user base from 10k to 10 million in just two years.",
   },
   {
-    name: "James Wilson",
-    title: "Cloud Solutions Architect",
-    company: "Amazon",
-    image: "https://plus.unsplash.com/premium_photo-1661763874747-405eb7388c58?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8dHJhaW5pbmd8ZW58MHx8MHx8fDA%3D",
+    name: "Maria Garcia",
+    title: "Startup CFO & Advisor",
+    company: "Self-Employed",
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1587&q=80",
     videoId: "x7Xz243s6xM",
-    bio: "AWS certified expert with enterprise experience",
+    bio: "Helped dozens of startups secure funding and navigate successful exits.",
   },
 ]
 
 interface VideoPlayerModalProps {
-  videoId: string | null;
-  onClose: () => void;
+  videoId: string | null
+  onClose: () => void
 }
 
 const VideoPlayerModal = ({ videoId, onClose }: VideoPlayerModalProps) => {
-  if (!videoId) return null;
+  if (!videoId) return null
 
   return (
     <Dialog open={!!videoId} onOpenChange={(isOpen) => !isOpen && onClose()}>
@@ -210,9 +210,12 @@ export default function TrainingPage() {
       <section className="py-16 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h1 className="text-4xl sm:text-5xl font-heading font-bold text-foreground mb-4">Our Training Programs</h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Discover training designed by industry experts to help you master in-demand skills and advance your career.
+            <h1 className="text-4xl sm:text-5xl font-heading font-bold text-foreground mb-4">
+              Accelerate Your Startup's Success
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Discover training designed by successful founders and venture capitalists to help you build, fund, and
+              scale your business.
             </p>
           </div>
 
@@ -221,7 +224,7 @@ export default function TrainingPage() {
               <div className="relative flex-1">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
                 <Input
-                  placeholder="Search for courses, e.g., 'Python'"
+                  placeholder="Search training, e.g., 'Fundraising'"
                   className="pl-10"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
@@ -233,12 +236,11 @@ export default function TrainingPage() {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="all">All Categories</SelectItem>
-                  <SelectItem value="Web Development">Web Development</SelectItem>
-                  <SelectItem value="Data Science">Data Science</SelectItem>
-                  <SelectItem value="Marketing">Marketing</SelectItem>
-                  <SelectItem value="Cloud Computing">Cloud Computing</SelectItem>
-                  <SelectItem value="Design">Design</SelectItem>
-                  <SelectItem value="Security">Security</SelectItem>
+                  <SelectItem value="Product">Product</SelectItem>
+                  <SelectItem value="Fundraising">Fundraising</SelectItem>
+                  <SelectItem value="Growth">Growth</SelectItem>
+                  <SelectItem value="Operations">Operations</SelectItem>
+                  <SelectItem value="Legal">Legal</SelectItem>
                 </SelectContent>
               </Select>
               <Select value={selectedLevel} onValueChange={setSelectedLevel}>
@@ -263,11 +265,11 @@ export default function TrainingPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
               <div
                 className="aspect-video lg:aspect-auto relative group cursor-pointer"
-                onClick={() => setPlayingVideoId("V_xro1bcAuA")}
+                onClick={() => setPlayingVideoId("N8_p8nQ5s_E")}
               >
                 <Image
-                  src="https://img.youtube.com/vi/V_xro1bcAuA/maxresdefault.jpg"
-                  alt="Featured Course"
+                  src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80"
+                  alt="Featured Training"
                   width={600}
                   height={400}
                   className="object-cover w-full h-full"
@@ -278,30 +280,30 @@ export default function TrainingPage() {
                 <Badge className="absolute top-4 left-4 bg-secondary text-secondary-foreground">🔥 Most Popular</Badge>
               </div>
               <div className="p-8 lg:p-12 flex flex-col justify-center">
-                <Badge className="w-fit mb-4">Web Development</Badge>
+                <Badge className="w-fit mb-4">Fundraising</Badge>
                 <h2 className="text-3xl font-heading font-bold text-foreground mb-4">
-                  Complete Full-Stack Web Development Bootcamp
+                  Venture Capital & Fundraising Masterclass
                 </h2>
                 <p className="text-muted-foreground text-lg mb-6 leading-relaxed">
-                  Master the complete web development stack with React, Node.js, Express, and MongoDB. Build real-world
-                  projects and get job-ready skills.
+                  Master the complete fundraising process, from crafting the perfect pitch deck to negotiating term
+                  sheets and closing your round. Taught by a seasoned VC.
                 </p>
                 <div className="space-y-3 mb-8">
                   <div className="flex items-center gap-2">
                     <BookOpen className="h-4 w-4 text-primary" />
-                    <span className="text-sm">40+ hours of video content</span>
+                    <span className="text-sm">25+ hours of video content & templates</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Award className="h-4 w-4 text-primary" />
-                    <span className="text-sm">Industry-recognized certificate</span>
+                    <span className="text-sm">Access to our private investor network</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Users className="h-4 w-4 text-primary" />
-                    <span className="text-sm">Join 2,847+ students</span>
+                    <span className="text-sm">Join 1,280+ successful founders</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <TrendingUp className="h-4 w-4 text-primary" />
-                    <span className="text-sm">95% job placement rate</span>
+                    <span className="text-sm">Alumni have raised over $500M</span>
                   </div>
                 </div>
                 <Button size="lg" className="w-fit">
@@ -393,9 +395,11 @@ export default function TrainingPage() {
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-heading font-bold text-foreground mb-4">Structured Learning Paths</h2>
+            <h2 className="text-3xl font-heading font-bold text-foreground mb-4">
+              Curated Learning Paths for Founders
+            </h2>
             <p className="text-xl text-muted-foreground">
-              Follow curated training sequences designed to take you from beginner to expert.
+              Follow a step-by-step roadmap to navigate the challenges of building a successful startup.
             </p>
           </div>
 
@@ -421,7 +425,7 @@ export default function TrainingPage() {
                   <h3 className="font-heading font-semibold text-xl mb-3">{path.title}</h3>
                   <p className="text-muted-foreground mb-4 leading-relaxed">{path.description}</p>
                   <div className="flex items-center justify-between text-sm text-muted-foreground mb-6">
-                    <span>{path.courses} Training</span>
+                    <span>{path.courses} Training Modules</span>
                     <span>{path.duration}</span>
                   </div>
                   <Button className="w-full">View Path</Button>
@@ -435,9 +439,11 @@ export default function TrainingPage() {
       <section className="py-16 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-heading font-bold text-foreground mb-4">Meet Our Expert Instructors</h2>
+            <h2 className="text-3xl font-heading font-bold text-foreground mb-4">
+              Learn From The Best in the Startup World
+            </h2>
             <p className="text-xl text-muted-foreground">
-              Learn from industry leaders with real-world experience at top companies.
+              Our instructors are successful founders, seasoned VCs, and expert operators from the world's top startups.
             </p>
           </div>
 
@@ -474,18 +480,19 @@ export default function TrainingPage() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-heading font-bold text-foreground mb-4">Frequently Asked Questions</h2>
             <p className="text-xl text-muted-foreground">
-              Get answers to common questions about our training programs.
+              Get answers to common questions about our startup training programs.
             </p>
           </div>
 
           <Accordion type="single" collapsible className="space-y-4">
             <AccordionItem value="item-1" className="border border-border rounded-lg px-6">
               <AccordionTrigger className="text-left font-medium">
-                Are the certificates accredited and recognized by employers?
+                Will this training help me get funding?
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground leading-relaxed">
-                Yes, our certificates are industry-recognized and valued by employers worldwide. We partner with leading
-                companies to ensure our curriculum meets current industry standards and requirements.
+                While we can't guarantee funding, our programs are designed to equip you with the skills, network, and
+                polished pitch deck that VCs look for. Many of our alumni have successfully raised capital after
+                completing our training.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-2" className="border border-border rounded-lg px-6">
@@ -506,20 +513,20 @@ export default function TrainingPage() {
             </AccordionItem>
             <AccordionItem value="item-4" className="border border-border rounded-lg px-6">
               <AccordionTrigger className="text-left font-medium">
-                Do I get lifetime access to course materials?
+                Do I get lifetime access to the materials?
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground leading-relaxed">
-                Yes, once you enroll in a training, you get lifetime access to all training materials, including future
-                updates and additional content. You can learn at your own pace and revisit materials anytime.
+                Yes, once you enroll in a training, you get lifetime access to all materials, including future updates
+                and additional content. You can learn at your own pace and revisit materials anytime.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-5" className="border border-border rounded-lg px-6">
               <AccordionTrigger className="text-left font-medium">
-                Is there support available if I get stuck?
+                Is there mentorship or support available?
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground leading-relaxed">
-                Yes, we provide comprehensive support including instructor Q&A, community forums, and dedicated support
-                staff. You can get help with technical issues, training content, or career guidance.
+                Yes! All programs include access to instructor Q&A sessions, a private community of fellow founders for
+                peer support, and opportunities for direct mentorship on our advanced learning paths.
               </AccordionContent>
             </AccordionItem>
           </Accordion>
