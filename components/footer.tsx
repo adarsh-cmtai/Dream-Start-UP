@@ -10,9 +10,9 @@ export function Footer() {
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-lg">E</span>
+                <span className="text-primary-foreground font-bold text-lg">D</span>
               </div>
-              <span className="font-heading font-bold text-xl">EduPro</span>
+              <span className="font-heading font-bold text-xl">Dream Start Up</span>
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">
               Empowering professionals worldwide with expert-led online training programs. Join thousands who are
