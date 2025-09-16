@@ -5,9 +5,9 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Accordion,
-  AccordionContent,@/components/layout/website/navigation
-  AccordionItem,
+  AccordionContent,
   AccordionTrigger,
+  AccordionItem,
 } from "@/components/ui/accordion";
 import {
   Search,
@@ -18,7 +18,7 @@ import {
   MessageCircle,
   HelpCircle,
 } from "lucide-react";
-import { Navigation } from "@/components/navigation";
+import { Navigation } from "@/components/layout/website/navigation";
 import { Footer } from "@/components/layout/website/footer";
 
 export default function FAQPage() {

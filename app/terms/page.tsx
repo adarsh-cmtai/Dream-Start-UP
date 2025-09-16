@@ -2,14 +2,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
-  FileText,@/components/layout/website/navigation
+  FileText,
   Scale,
   AlertTriangle,
   Users,
   CreditCard,
   Shield,
 } from "lucide-react";
-import { Navigation } from "@/components/navigation";
+import { Navigation } from "@/components/layout/website/navigation";
 import { Footer } from "@/components/layout/website/footer";
 
 export default function TermsOfServicePage() {
