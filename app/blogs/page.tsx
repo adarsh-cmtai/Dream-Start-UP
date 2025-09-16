@@ -1,17 +1,25 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { Navigation } from "@/components/navigation"
-import { Footer } from "@/components/footer"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Input } from "@/components/ui/input"
-import { Search, Calendar, User, ArrowRight, TrendingUp, BookOpen, Clock } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
-import { useState } from "react"
+import { Navigation } from "@/components/layout/website/navigation";
+import { Footer } from "@/components/layout/website/footer";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import {
+  Search,
+  Calendar,
+  User,
+  ArrowRight,
+  TrendingUp,
+  BookOpen,
+  Clock,
+} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
 
 const featuredPost = {
   id: 1,
@@ -24,7 +32,7 @@ const featuredPost = {
   readTime: "8 min read",
   image: "/diverse-professionals-learning-collaboratively-in-.jpg",
   featured: true,
-}
+};
 
 const blogPosts = [
   {
@@ -115,9 +123,16 @@ const blogPosts = [
     readTime: "7 min read",
     image: "/diverse-professionals-learning-collaboratively-in-.jpg",
   },
-]
+];
 
-const categories = ["All", "Technology", "Career Development", "Data Science", "Security", "Design"]
+const categories = [
+  "All",
+  "Technology",
+  "Career Development",
+  "Data Science",
+  "Security",
+  "Design",
+];
 
 const recentPosts = [
   "The Future of Remote Work: Essential Skills for 2024",
@@ -125,7 +140,7 @@ const recentPosts = [
   "Building a Personal Brand as a Developer",
   "The Rise of No-Code/Low-Code Platforms",
   "Data Science Tools and Techniques for 2024",
-]
+];
 
 const popularPosts = [
   {
@@ -143,27 +158,28 @@ const popularPosts = [
     readTime: "8 min read",
     views: "6.7K",
   },
-]
+];
 
 export default function BlogsPage() {
-  const [searchTerm, setSearchTerm] = useState("")
-  const [selectedCategory, setSelectedCategory] = useState("All")
-  const [email, setEmail] = useState("")
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [email, setEmail] = useState("");
 
   const filteredPosts = blogPosts.filter((post) => {
     const matchesSearch =
       post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      post.excerpt.toLowerCase().includes(searchTerm.toLowerCase())
-    const matchesCategory = selectedCategory === "All" || post.category === selectedCategory
-    return matchesSearch && matchesCategory
-  })
+      post.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory =
+      selectedCategory === "All" || post.category === selectedCategory;
+    return matchesSearch && matchesCategory;
+  });
 
   const handleNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     // Handle newsletter subscription
-    console.log("Newsletter subscription:", email)
-    setEmail("")
-  }
+    console.log("Newsletter subscription:", email);
+    setEmail("");
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -182,14 +198,18 @@ export default function BlogsPage() {
                   height={400}
                   className="object-cover w-full h-full"
                 />
-                <Badge className="absolute top-4 left-4 bg-secondary text-secondary-foreground">Featured</Badge>
+                <Badge className="absolute top-4 left-4 bg-secondary text-secondary-foreground">
+                  Featured
+                </Badge>
               </div>
               <div className="p-8 lg:p-12 flex flex-col justify-center">
                 <Badge className="w-fit mb-4">{featuredPost.category}</Badge>
                 <h1 className="text-3xl font-heading font-bold text-foreground mb-4 leading-tight">
                   {featuredPost.title}
                 </h1>
-                <p className="text-muted-foreground text-lg mb-6 leading-relaxed">{featuredPost.excerpt}</p>
+                <p className="text-muted-foreground text-lg mb-6 leading-relaxed">
+                  {featuredPost.excerpt}
+                </p>
                 <div className="flex items-center gap-4 text-sm text-muted-foreground mb-6">
                   <div className="flex items-center gap-1">
                     <User className="h-4 w-4" />
@@ -237,7 +257,9 @@ export default function BlogsPage() {
                   {categories.map((category) => (
                     <Button
                       key={category}
-                      variant={selectedCategory === category ? "default" : "outline"}
+                      variant={
+                        selectedCategory === category ? "default" : "outline"
+                      }
                       size="sm"
                       onClick={() => setSelectedCategory(category)}
                       className="bg-transparent"
@@ -251,7 +273,10 @@ export default function BlogsPage() {
               {/* Blog Posts Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
                 {filteredPosts.map((post) => (
-                  <Card key={post.id} className="overflow-hidden hover:shadow-lg transition-shadow group">
+                  <Card
+                    key={post.id}
+                    className="overflow-hidden hover:shadow-lg transition-shadow group"
+                  >
                     <div className="aspect-video relative overflow-hidden">
                       <Image
                         src={post.image || "/placeholder.svg"}
@@ -268,7 +293,9 @@ export default function BlogsPage() {
                       <h3 className="font-heading font-semibold text-lg mb-2 line-clamp-2 leading-tight">
                         {post.title}
                       </h3>
-                      <p className="text-muted-foreground text-sm mb-4 line-clamp-2 leading-relaxed">{post.excerpt}</p>
+                      <p className="text-muted-foreground text-sm mb-4 line-clamp-2 leading-relaxed">
+                        {post.excerpt}
+                      </p>
                       <div className="flex items-center gap-4 text-xs text-muted-foreground mb-4">
                         <div className="flex items-center gap-1">
                           <User className="h-3 w-3" />
@@ -283,7 +310,12 @@ export default function BlogsPage() {
                           <span>{post.readTime}</span>
                         </div>
                       </div>
-                      <Button size="sm" variant="ghost" asChild className="p-0 h-auto">
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        asChild
+                        className="p-0 h-auto"
+                      >
                         <Link href={`/blogs/${post.id}`}>
                           Read More
                           <ArrowRight className="ml-1 h-4 w-4" />
@@ -296,7 +328,12 @@ export default function BlogsPage() {
 
               {/* Pagination */}
               <div className="flex justify-center items-center gap-2">
-                <Button variant="outline" size="sm" disabled className="bg-transparent">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  disabled
+                  className="bg-transparent"
+                >
                   Previous
                 </Button>
                 <Button variant="default" size="sm">
@@ -318,7 +355,9 @@ export default function BlogsPage() {
             <div className="space-y-8">
               {/* Search */}
               <Card className="p-6">
-                <h3 className="font-heading font-semibold text-lg mb-4">Search Blog</h3>
+                <h3 className="font-heading font-semibold text-lg mb-4">
+                  Search Blog
+                </h3>
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
                   <Input
@@ -332,7 +371,9 @@ export default function BlogsPage() {
 
               {/* Categories */}
               <Card className="p-6">
-                <h3 className="font-heading font-semibold text-lg mb-4">Categories</h3>
+                <h3 className="font-heading font-semibold text-lg mb-4">
+                  Categories
+                </h3>
                 <div className="space-y-2">
                   {categories.slice(1).map((category) => (
                     <button
@@ -352,7 +393,9 @@ export default function BlogsPage() {
 
               {/* Recent Posts */}
               <Card className="p-6">
-                <h3 className="font-heading font-semibold text-lg mb-4">Recent Posts</h3>
+                <h3 className="font-heading font-semibold text-lg mb-4">
+                  Recent Posts
+                </h3>
                 <div className="space-y-3">
                   {recentPosts.map((post, index) => (
                     <Link
@@ -402,12 +445,17 @@ export default function BlogsPage() {
             <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto">
               <BookOpen className="h-8 w-8" />
             </div>
-            <h2 className="text-3xl font-heading font-bold">Get Learning Tips Straight to Your Inbox</h2>
+            <h2 className="text-3xl font-heading font-bold">
+              Get Learning Tips Straight to Your Inbox
+            </h2>
             <p className="text-xl opacity-90 max-w-2xl mx-auto">
-              Join 25,000+ professionals who receive our weekly newsletter with the latest insights, tips, and career
-              advice.
+              Join 25,000+ professionals who receive our weekly newsletter with
+              the latest insights, tips, and career advice.
             </p>
-            <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            <form
+              onSubmit={handleNewsletterSubmit}
+              className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
+            >
               <Input
                 type="email"
                 placeholder="Enter your email address"
@@ -416,11 +464,17 @@ export default function BlogsPage() {
                 className="bg-white text-foreground border-white/20"
                 required
               />
-              <Button type="submit" variant="secondary" className="bg-white text-secondary hover:bg-white/90">
+              <Button
+                type="submit"
+                variant="secondary"
+                className="bg-white text-secondary hover:bg-white/90"
+              >
                 Subscribe
               </Button>
             </form>
-            <p className="text-sm opacity-75">No spam, unsubscribe at any time.</p>
+            <p className="text-sm opacity-75">
+              No spam, unsubscribe at any time.
+            </p>
           </div>
         </div>
       </section>
@@ -429,14 +483,20 @@ export default function BlogsPage() {
       <section className="py-16 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-heading font-bold text-foreground mb-4">Most Popular Articles</h2>
+            <h2 className="text-3xl font-heading font-bold text-foreground mb-4">
+              Most Popular Articles
+            </h2>
             <p className="text-xl text-muted-foreground">
-              Discover our most-read articles that have helped thousands of professionals.
+              Discover our most-read articles that have helped thousands of
+              professionals.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {blogPosts.slice(0, 3).map((post) => (
-              <Card key={post.id} className="overflow-hidden hover:shadow-lg transition-shadow group">
+              <Card
+                key={post.id}
+                className="overflow-hidden hover:shadow-lg transition-shadow group"
+              >
                 <div className="aspect-video relative overflow-hidden">
                   <Image
                     src={post.image || "/placeholder.svg"}
@@ -445,11 +505,17 @@ export default function BlogsPage() {
                     height={200}
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
                   />
-                  <Badge className="absolute top-3 left-3 bg-primary text-primary-foreground">{post.category}</Badge>
+                  <Badge className="absolute top-3 left-3 bg-primary text-primary-foreground">
+                    {post.category}
+                  </Badge>
                 </div>
                 <CardContent className="p-6">
-                  <h3 className="font-heading font-semibold text-lg mb-2 line-clamp-2">{post.title}</h3>
-                  <p className="text-muted-foreground text-sm mb-4 line-clamp-2">{post.excerpt}</p>
+                  <h3 className="font-heading font-semibold text-lg mb-2 line-clamp-2">
+                    {post.title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
+                    {post.excerpt}
+                  </p>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 text-xs text-muted-foreground">
                       <span>{post.readTime}</span>
@@ -473,8 +539,8 @@ export default function BlogsPage() {
               Liked this article? Master the topic in our courses.
             </h3>
             <p className="text-muted-foreground mb-6">
-              Take your learning to the next level with our comprehensive training programs designed by industry
-              experts.
+              Take your learning to the next level with our comprehensive
+              training programs designed by industry experts.
             </p>
             <Button size="lg" asChild>
               <Link href="/training">
@@ -488,5 +554,5 @@ export default function BlogsPage() {
 
       <Footer />
     </div>
-  )
+  );
 }

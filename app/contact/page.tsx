@@ -1,19 +1,41 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { Navigation } from "@/components/navigation"
-import { Footer } from "@/components/footer"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Mail, Phone, MapPin, Clock, Send, MessageSquare, Linkedin, Twitter, Facebook, Youtube } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
-import { useState } from "react"
+import { Navigation } from "@/components/layout/website/navigation";
+import { Footer } from "@/components/layout/website/footer";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Clock,
+  Send,
+  MessageSquare,
+  Linkedin,
+  Twitter,
+  Facebook,
+  Youtube,
+} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
 
 const contactInfo = [
   {
@@ -40,7 +62,7 @@ const contactInfo = [
     value: "Mon-Fri, 9am - 5pm EST",
     href: "#",
   },
-]
+];
 
 const supportTeam = [
   {
@@ -61,7 +83,7 @@ const supportTeam = [
     image: "/support-team-emma.png",
     description: "Handles enterprise and custom training solutions",
   },
-]
+];
 
 const faqs = [
   {
@@ -84,7 +106,7 @@ const faqs = [
     answer:
       "Our platform is fully responsive and works on all devices. You can also download our mobile app from the App Store or Google Play for the best mobile learning experience.",
   },
-]
+];
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -92,19 +114,19 @@ export default function ContactPage() {
     email: "",
     subject: "",
     message: "",
-  })
+  });
 
   const handleInputChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
-  }
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     // Handle form submission
-    console.log("Contact form submitted:", formData)
+    console.log("Contact form submitted:", formData);
     // Reset form
-    setFormData({ fullName: "", email: "", subject: "", message: "" })
-  }
+    setFormData({ fullName: "", email: "", subject: "", message: "" });
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -113,10 +135,13 @@ export default function ContactPage() {
       {/* Page Header */}
       <section className="py-16 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl sm:text-5xl font-heading font-bold text-foreground mb-4">Get in Touch</h1>
+          <h1 className="text-4xl sm:text-5xl font-heading font-bold text-foreground mb-4">
+            Get in Touch
+          </h1>
           <p className="text-xl text-muted-foreground leading-relaxed">
-            We'd love to hear from you. Whether you have a question about our courses, pricing, or anything else, our
-            team is ready to answer all your questions.
+            We'd love to hear from you. Whether you have a question about our
+            courses, pricing, or anything else, our team is ready to answer all
+            your questions.
           </p>
         </div>
       </section>
@@ -128,8 +153,13 @@ export default function ContactPage() {
             {/* Contact Form */}
             <Card className="p-8">
               <CardHeader className="px-0 pt-0">
-                <CardTitle className="text-2xl font-heading">Send us a Message</CardTitle>
-                <CardDescription>Fill out the form below and we'll get back to you within 24 hours.</CardDescription>
+                <CardTitle className="text-2xl font-heading">
+                  Send us a Message
+                </CardTitle>
+                <CardDescription>
+                  Fill out the form below and we'll get back to you within 24
+                  hours.
+                </CardDescription>
               </CardHeader>
               <CardContent className="px-0 pb-0">
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -139,7 +169,9 @@ export default function ContactPage() {
                       id="fullName"
                       placeholder="Enter your full name"
                       value={formData.fullName}
-                      onChange={(e) => handleInputChange("fullName", e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("fullName", e.target.value)
+                      }
                       required
                     />
                   </div>
@@ -151,7 +183,9 @@ export default function ContactPage() {
                       type="email"
                       placeholder="your.email@example.com"
                       value={formData.email}
-                      onChange={(e) => handleInputChange("email", e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("email", e.target.value)
+                      }
                       required
                     />
                   </div>
@@ -162,7 +196,9 @@ export default function ContactPage() {
                       id="subject"
                       placeholder="What is this regarding?"
                       value={formData.subject}
-                      onChange={(e) => handleInputChange("subject", e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("subject", e.target.value)
+                      }
                       required
                     />
                   </div>
@@ -174,7 +210,9 @@ export default function ContactPage() {
                       placeholder="Please describe your question or concern in detail..."
                       rows={5}
                       value={formData.message}
-                      onChange={(e) => handleInputChange("message", e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("message", e.target.value)
+                      }
                       required
                     />
                   </div>
@@ -191,8 +229,12 @@ export default function ContactPage() {
             <div className="space-y-8">
               <Card className="p-8">
                 <CardHeader className="px-0 pt-0">
-                  <CardTitle className="text-2xl font-heading">Contact Information</CardTitle>
-                  <CardDescription>Get in touch with us through any of these channels.</CardDescription>
+                  <CardTitle className="text-2xl font-heading">
+                    Contact Information
+                  </CardTitle>
+                  <CardDescription>
+                    Get in touch with us through any of these channels.
+                  </CardDescription>
                 </CardHeader>
                 <CardContent className="px-0 pb-0">
                   <div className="space-y-6">
@@ -202,7 +244,9 @@ export default function ContactPage() {
                           <div className="text-primary">{info.icon}</div>
                         </div>
                         <div>
-                          <p className="font-medium text-foreground">{info.label}</p>
+                          <p className="font-medium text-foreground">
+                            {info.label}
+                          </p>
                           {info.href && info.href !== "#" ? (
                             <Link
                               href={info.href}
@@ -211,7 +255,9 @@ export default function ContactPage() {
                               {info.value}
                             </Link>
                           ) : (
-                            <p className="text-muted-foreground">{info.value}</p>
+                            <p className="text-muted-foreground">
+                              {info.value}
+                            </p>
                           )}
                         </div>
                       </div>
@@ -224,11 +270,14 @@ export default function ContactPage() {
               <Card className="p-6 bg-secondary/5 border-secondary/20">
                 <div className="flex items-center gap-3 mb-3">
                   <MessageSquare className="h-5 w-5 text-secondary" />
-                  <h3 className="font-heading font-semibold text-foreground">Quick Response Guarantee</h3>
+                  <h3 className="font-heading font-semibold text-foreground">
+                    Quick Response Guarantee
+                  </h3>
                 </div>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  We typically respond to all inquiries within 2-4 hours during business hours. For urgent technical
-                  issues, our support team is available 24/7.
+                  We typically respond to all inquiries within 2-4 hours during
+                  business hours. For urgent technical issues, our support team
+                  is available 24/7.
                 </p>
               </Card>
             </div>
@@ -240,9 +289,12 @@ export default function ContactPage() {
       <section className="py-16 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-heading font-bold text-foreground mb-4">Visit Our Office</h2>
+            <h2 className="text-3xl font-heading font-bold text-foreground mb-4">
+              Visit Our Office
+            </h2>
             <p className="text-xl text-muted-foreground">
-              Located in the heart of Education City, we welcome visitors by appointment.
+              Located in the heart of Education City, we welcome visitors by
+              appointment.
             </p>
           </div>
           <Card className="overflow-hidden">
@@ -251,7 +303,9 @@ export default function ContactPage() {
                 <MapPin className="h-12 w-12 text-muted-foreground mx-auto" />
                 <div>
                   <p className="font-medium text-foreground">Interactive Map</p>
-                  <p className="text-sm text-muted-foreground">123 Learning Lane, Education City, 45678</p>
+                  <p className="text-sm text-muted-foreground">
+                    123 Learning Lane, Education City, 45678
+                  </p>
                 </div>
               </div>
             </div>
@@ -262,16 +316,35 @@ export default function ContactPage() {
       {/* Social Media Section */}
       <section className="py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-heading font-bold text-foreground mb-4">Follow Us</h2>
+          <h2 className="text-3xl font-heading font-bold text-foreground mb-4">
+            Follow Us
+          </h2>
           <p className="text-xl text-muted-foreground mb-8">
-            Stay connected and get the latest updates on courses, tips, and industry insights.
+            Stay connected and get the latest updates on courses, tips, and
+            industry insights.
           </p>
           <div className="flex justify-center gap-6">
             {[
-              { icon: <Linkedin className="h-6 w-6" />, href: "#", label: "LinkedIn" },
-              { icon: <Twitter className="h-6 w-6" />, href: "#", label: "Twitter" },
-              { icon: <Facebook className="h-6 w-6" />, href: "#", label: "Facebook" },
-              { icon: <Youtube className="h-6 w-6" />, href: "#", label: "YouTube" },
+              {
+                icon: <Linkedin className="h-6 w-6" />,
+                href: "#",
+                label: "LinkedIn",
+              },
+              {
+                icon: <Twitter className="h-6 w-6" />,
+                href: "#",
+                label: "Twitter",
+              },
+              {
+                icon: <Facebook className="h-6 w-6" />,
+                href: "#",
+                label: "Facebook",
+              },
+              {
+                icon: <Youtube className="h-6 w-6" />,
+                href: "#",
+                label: "YouTube",
+              },
             ].map((social, index) => (
               <Link
                 key={index}
@@ -290,14 +363,20 @@ export default function ContactPage() {
       <section className="py-16 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-heading font-bold text-foreground mb-4">Meet the Support Team</h2>
+            <h2 className="text-3xl font-heading font-bold text-foreground mb-4">
+              Meet the Support Team
+            </h2>
             <p className="text-xl text-muted-foreground">
-              Our dedicated team is here to help you succeed in your learning journey.
+              Our dedicated team is here to help you succeed in your learning
+              journey.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {supportTeam.map((member, index) => (
-              <Card key={index} className="text-center p-6 hover:shadow-lg transition-shadow">
+              <Card
+                key={index}
+                className="text-center p-6 hover:shadow-lg transition-shadow"
+              >
                 <div className="w-24 h-24 rounded-full overflow-hidden mx-auto mb-4">
                   <Image
                     src={member.image || "/placeholder.svg"}
@@ -307,9 +386,15 @@ export default function ContactPage() {
                     className="object-cover"
                   />
                 </div>
-                <h3 className="font-heading font-semibold text-lg mb-1">{member.name}</h3>
-                <p className="text-primary text-sm font-medium mb-3">{member.role}</p>
-                <p className="text-muted-foreground text-sm leading-relaxed">{member.description}</p>
+                <h3 className="font-heading font-semibold text-lg mb-1">
+                  {member.name}
+                </h3>
+                <p className="text-primary text-sm font-medium mb-3">
+                  {member.role}
+                </p>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  {member.description}
+                </p>
               </Card>
             ))}
           </div>
@@ -320,17 +405,28 @@ export default function ContactPage() {
       <section className="py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-heading font-bold text-foreground mb-4">Frequently Asked Questions</h2>
+            <h2 className="text-3xl font-heading font-bold text-foreground mb-4">
+              Frequently Asked Questions
+            </h2>
             <p className="text-xl text-muted-foreground">
-              Quick answers to common questions. Can't find what you're looking for? Contact us directly.
+              Quick answers to common questions. Can't find what you're looking
+              for? Contact us directly.
             </p>
           </div>
 
           <Accordion type="single" collapsible className="space-y-4">
             {faqs.map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index}`} className="border border-border rounded-lg px-6">
-                <AccordionTrigger className="text-left font-medium hover:no-underline">{faq.question}</AccordionTrigger>
-                <AccordionContent className="text-muted-foreground leading-relaxed">{faq.answer}</AccordionContent>
+              <AccordionItem
+                key={index}
+                value={`item-${index}`}
+                className="border border-border rounded-lg px-6"
+              >
+                <AccordionTrigger className="text-left font-medium hover:no-underline">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed">
+                  {faq.answer}
+                </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
@@ -346,5 +442,5 @@ export default function ContactPage() {
 
       <Footer />
     </div>
-  )
+  );
 }
