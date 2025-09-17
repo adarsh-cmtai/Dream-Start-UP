@@ -10,6 +10,7 @@ import {
   selectServices,
   selectServicesLoading,
   selectServicesError,
+  selectServicesPagination,
   Service,
 } from "@/lib/redux/serviceSlice";
 import { Button } from "@/components/ui/button";
@@ -21,6 +22,8 @@ import { toast } from "sonner";
 import { Grid, List, Edit, Trash2, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import ConfirmationModal from "@/components/all/ConfirmationModal";
+import ImageUploader from "@/components/all/ImageUploader";
+import Pagination from "@/components/all/Pagination";
 
 type ViewMode = "grid" | "table";
 
@@ -29,13 +32,12 @@ export default function AdminServicesPage() {
   const services = useAppSelector(selectServices);
   const loading = useAppSelector(selectServicesLoading);
   const error = useAppSelector(selectServicesError);
+  const pagination = useAppSelector(selectServicesPagination);
 
   const [modalOpen, setModalOpen] = useState(false);
   const [editingService, setEditingService] = useState<Service | null>(null);
   const [confirmationOpen, setConfirmationOpen] = useState(false);
-  const [serviceIdToDelete, setServiceIdToDelete] = useState<string | null>(
-    null
-  );
+  const [serviceIdToDelete, setServiceIdToDelete] = useState<string | null>(null);
 
   const [formData, setFormData] = useState<Partial<Service>>({
     name: "",
@@ -49,10 +51,56 @@ export default function AdminServicesPage() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [displayMode, setDisplayMode] = useState<ViewMode>("grid");
   const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [allServices, setAllServices] = useState<Service[]>([]);
+  const [filteredServices, setFilteredServices] = useState<Service[]>([]);
 
+  // Debounced search effect
+ useEffect(() => {
+  const timeoutId = setTimeout(() => {
+    setCurrentPage(1);
+    dispatch(fetchServices({
+      page: 1,
+      limit: itemsPerPage,
+      search: searchTerm.trim(),
+    }));
+  }, 300);
+
+  return () => clearTimeout(timeoutId);
+}, [searchTerm, itemsPerPage]);
+
+  
+
+  // Fetch data when page changes
   useEffect(() => {
-    dispatch(fetchServices());
-  }, [dispatch]);
+    fetchData();
+  }, [currentPage, itemsPerPage]);
+
+  const fetchData = useCallback(() => {
+    dispatch(fetchServices({
+      page: currentPage,
+      limit: itemsPerPage,
+      search: searchTerm.trim(),
+    }));
+  }, [dispatch, currentPage, itemsPerPage, searchTerm]);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const handleItemsPerPageChange = (newItemsPerPage: number) => {
+    setItemsPerPage(newItemsPerPage);
+    setCurrentPage(1); // Reset to first page
+  };
+
+  // Provide default pagination values to prevent undefined errors
+const safePagination = pagination || {
+  page: 1,
+  limit: 10,
+  total: 0,
+  totalPages: 0,
+};
 
   const openCreate = () => {
     setEditingService(null);
@@ -113,7 +161,7 @@ export default function AdminServicesPage() {
 
       setModalOpen(false);
       setEditingService(null);
-      dispatch(fetchServices());
+      fetchData(); // Refresh current page
     } catch (err: any) {
       toast.error(err.message || "Failed to save service.");
     }
@@ -129,14 +177,17 @@ export default function AdminServicesPage() {
     try {
       await dispatch(deleteService(serviceIdToDelete)).unwrap();
       toast.success("Service deleted successfully!");
-      dispatch(fetchServices());
+      fetchData(); // Refresh current page
     } catch (err) {
       toast.error((err as Error).message || "Failed to delete service.");
     }
     setConfirmationOpen(false);
     setServiceIdToDelete(null);
-    dispatch(fetchServices());
   };
+
+  const handleImageUploaded = useCallback((downloadURL: string) => {
+    setFormData((prev) => ({ ...prev, image: downloadURL }));
+  }, []);
 
   const addTag = () => {
     const tag = newTag.trim();
@@ -153,13 +204,9 @@ export default function AdminServicesPage() {
     });
   };
 
-  const filteredServices = services.filter((s) =>
-    s.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
   const renderGridView = () => (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {filteredServices.map((s) => (
+      {services.map((s) => (
         <Card key={s.id}>
           <CardHeader>
             <CardTitle>{s.name}</CardTitle>
@@ -189,7 +236,7 @@ export default function AdminServicesPage() {
   const renderTableView = () => (
     <Card>
       <CardHeader>
-        <CardTitle>All Services ({filteredServices.length})</CardTitle>
+        <CardTitle>All Services ({safePagination.total})</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="overflow-x-auto">
@@ -204,25 +251,29 @@ export default function AdminServicesPage() {
               </tr>
             </thead>
             <tbody>
-              {filteredServices.map((s) => (
+              {services.map((s) => (
                 <tr key={s.id} className="hover:bg-gray-50 border-b">
                   <td className="p-2">{s.name}</td>
                   <td className="p-2">
                     <Badge variant="outline">{s.category}</Badge>
                   </td>
                   <td className="p-2">{s.shortDescription}</td>
-                  <td className="p-2 flex flex-wrap gap-1">
-                    {(s.tags || []).map((tag) => (
-                      <Badge key={tag} variant="secondary">{tag}</Badge>
-                    ))}
+                  <td className="p-2">
+                    <div className="flex flex-wrap gap-1">
+                      {(s.tags || []).map((tag) => (
+                        <Badge key={tag} variant="secondary">{tag}</Badge>
+                      ))}
+                    </div>
                   </td>
-                  <td className="p-2 flex gap-2">
-                    <Button size="sm" variant="outline" onClick={() => openEdit(s)}>
-                      <Edit className="h-4 w-4" />
-                    </Button>
-                    <Button size="sm" variant="destructive" onClick={() => confirmDelete(s.id)}>
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
+                  <td className="p-2">
+                    <div className="flex gap-2">
+                      <Button size="sm" variant="outline" onClick={() => openEdit(s)}>
+                        <Edit className="h-4 w-4" />
+                      </Button>
+                      <Button size="sm" variant="destructive" onClick={() => confirmDelete(s.id)}>
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -238,6 +289,19 @@ export default function AdminServicesPage() {
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold">Services Management</h1>
         <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <label className="text-sm font-medium">Items per page:</label>
+            <select
+              value={itemsPerPage}
+              onChange={(e) => handleItemsPerPageChange(Number(e.target.value))}
+              className="border rounded px-2 py-1 text-sm"
+            >
+              <option value={5}>5</option>
+              <option value={10}>10</option>
+              <option value={20}>20</option>
+              <option value={50}>50</option>
+            </select>
+          </div>
           <div className="flex items-center gap-2 border rounded-md p-1">
             <Button
               size="sm"
@@ -269,7 +333,28 @@ export default function AdminServicesPage() {
       />
 
       {loading && <p>Loading...</p>}
-      {displayMode === "grid" ? renderGridView() : renderTableView()}
+      
+      {!loading && services.length === 0 && (
+        <div className="text-center py-8">
+          <p className="text-gray-500">No services found.</p>
+        </div>
+      )}
+
+      {!loading && services.length > 0 && (
+        <>
+          {displayMode === "grid" ? renderGridView() : renderTableView()}
+          
+          {safePagination.totalPages > 0 && (
+  <Pagination
+    currentPage={safePagination.page}
+    totalPages={safePagination.totalPages}
+    onPageChange={handlePageChange}
+    totalItems={safePagination.total}
+    itemsPerPage={safePagination.limit}
+  />
+)}
+        </>
+      )}
 
       <ConfirmationModal
         open={confirmationOpen}
@@ -327,9 +412,16 @@ export default function AdminServicesPage() {
 
             <div>
               <label className="block font-medium mb-1">Image URL</label>
-              <Input
-                value={formData.image || ""}
-                onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+              <ImageUploader
+                key={`service-image-uploader-${formData.image}`}
+                onImageUploaded={handleImageUploaded}
+                currentImageUrl={formData.image}
+                config={{
+                  folder: "service-images",
+                  maxSizeInMB: 5,
+                  allowedTypes: ["image/jpeg", "image/png", "image/webp"],
+                }}
+                placeholder="Choose service image..."
               />
             </div>
 

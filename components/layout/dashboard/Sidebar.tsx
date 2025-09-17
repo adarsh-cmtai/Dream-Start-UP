@@ -18,7 +18,7 @@ const navigation = [
   { name: "Dashboard", href: "/dashboard/admin", icon: LayoutGrid },
   { name: "Leads", href: "/dashboard/admin/leads", icon: UserPlus },
   { name: "Services", href: "/dashboard/admin/services", icon: Settings },
-  { name: "Training", href: "/dashboard/admin/traning", icon: StoreIcon },
+  { name: "Training", href: "/dashboard/admin/training", icon: StoreIcon },
   { name: "Blogs", href: "/dashboard/admin/blogs", icon: Newspaper },
   
   { name: "Logout", href: "/logout", icon: LogOut },

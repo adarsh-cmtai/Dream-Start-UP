@@ -13,12 +13,34 @@ export interface Service {
   tags?: string[];
 }
 
+// Pagination interface
+export interface PaginationMeta {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+}
+
+// API Response interface
+export interface ServiceResponse {
+  services: Service[];
+  pagination: PaginationMeta;
+}
+
+// Fetch Services Parameters
+export interface FetchServicesParams {
+  page?: number;
+  limit?: number;
+  search?: string;
+}
+
 // Slice state
 interface ServicesState {
   services: Service[];
   currentService: Service | null;
   loading: boolean;
   error: string | null;
+  pagination: PaginationMeta;
 }
 
 const initialState: ServicesState = {
@@ -26,15 +48,32 @@ const initialState: ServicesState = {
   currentService: null,
   loading: false,
   error: null,
+  pagination: {
+    page: 1,
+    limit: 10,
+    total: 0,
+    totalPages: 0,
+  },
 };
 
 // Async thunks
-export const fetchServices = createAsyncThunk<Service[], void, { rejectValue: string }>(
+export const fetchServices = createAsyncThunk<
+  ServiceResponse,
+  FetchServicesParams,
+  { rejectValue: string }
+>(
   "services/fetchAll",
-  async (_, { rejectWithValue }) => {
+  async (params = {}, { rejectWithValue }) => {
     try {
-      const res = await api.get<{ services: Service[]; page: number; limit: number; total: number }>("services");
-      return res.data.services;
+      const { page = 1, limit = 10, search = "" } = params;
+      const queryParams = new URLSearchParams({
+        page: page.toString(),
+        limit: limit.toString(),
+        ...(search && { search }),
+      });
+      
+      const res = await api.get<ServiceResponse>(`services?${queryParams}`);
+      return res.data;
     } catch (error: any) {
       return rejectWithValue(error.response?.data?.error || "Error fetching services");
     }
@@ -100,16 +139,31 @@ const servicesSlice = createSlice({
     clearError: (state) => {
       state.error = null;
     },
+    setPaginationPage: (state, action: PayloadAction<number>) => {
+      state.pagination.page = action.payload;
+    },
+    setPaginationLimit: (state, action: PayloadAction<number>) => {
+      state.pagination.limit = action.payload;
+    },
+    resetPagination: (state) => {
+      state.pagination = {
+        page: 1,
+        limit: 10,
+        total: 0,
+        totalPages: 0,
+      };
+    },
   },
   extraReducers: (builder) => {
     builder
-      // Fetch all
+      // Fetch all with pagination
       .addCase(fetchServices.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchServices.fulfilled, (state, action: PayloadAction<Service[]>) => {
-        state.services = action.payload;
+      .addCase(fetchServices.fulfilled, (state, action: PayloadAction<ServiceResponse>) => {
+        state.services = action.payload.services;
+        state.pagination = action.payload.pagination;
         state.loading = false;
       })
       .addCase(fetchServices.rejected, (state, action) => {
@@ -117,39 +171,14 @@ const servicesSlice = createSlice({
         state.loading = false;
       })
 
-      // Fetch by ID
-      .addCase(fetchServiceById.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(fetchServiceById.fulfilled, (state, action: PayloadAction<Service>) => {
-        state.currentService = action.payload;
-        state.loading = false;
-      })
-      .addCase(fetchServiceById.rejected, (state, action) => {
-        state.error = action.payload ?? "Service not found";
-        state.loading = false;
-      })
-
       // Add
-      .addCase(addService.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
       .addCase(addService.fulfilled, (state, action: PayloadAction<Service>) => {
-        state.services.push(action.payload);
-        state.loading = false;
-      })
-      .addCase(addService.rejected, (state, action) => {
-        state.error = action.payload ?? "Error creating service";
+        state.services.unshift(action.payload);
+        state.pagination.total += 1;
         state.loading = false;
       })
 
       // Update
-      .addCase(updateService.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
       .addCase(updateService.fulfilled, (state, action: PayloadAction<Service>) => {
         const index = state.services.findIndex((s) => s.id === action.payload.id);
         if (index !== -1) {
@@ -160,39 +189,32 @@ const servicesSlice = createSlice({
         }
         state.loading = false;
       })
-      .addCase(updateService.rejected, (state, action) => {
-        state.error = action.payload ?? "Error updating service";
-        state.loading = false;
-      })
 
       // Delete
-      .addCase(deleteService.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
       .addCase(deleteService.fulfilled, (state, action: PayloadAction<string>) => {
         state.services = state.services.filter((s) => s.id !== action.payload);
         if (state.currentService?.id === action.payload) {
           state.currentService = null;
         }
-        state.loading = false;
-      })
-      .addCase(deleteService.rejected, (state, action) => {
-        state.error = action.payload ?? "Error deleting service";
+        state.pagination.total -= 1;
         state.loading = false;
       });
   },
 });
 
-export const { clearCurrentService, clearError } = servicesSlice.actions;
+export const { 
+  clearCurrentService, 
+  clearError, 
+  setPaginationPage, 
+  setPaginationLimit, 
+  resetPagination 
+} = servicesSlice.actions;
 
-// Define RootState properly here or import from store
-export interface RootState {
-  services: ServicesState;
-}
-
-export const selectServices = (state: RootState) => state.services.services;
-export const selectServicesLoading = (state: RootState) => state.services.loading;
-export const selectServicesError = (state: RootState) => state.services.error;
+// Selectors
+export const selectServices = (state: { services: ServicesState }) => state.services.services;
+export const selectServicesLoading = (state: { services: ServicesState }) => state.services.loading;
+export const selectServicesError = (state: { services: ServicesState }) => state.services.error;
+export const selectServicesPagination = (state: { services: ServicesState }) => state.services.pagination;
+export const selectCurrentService = (state: { services: ServicesState }) => state.services.currentService;
 
 export default servicesSlice.reducer;
