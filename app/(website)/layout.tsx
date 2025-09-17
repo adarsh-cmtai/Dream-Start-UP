@@ -1,12 +1,9 @@
 import type React from "react";
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { Inter } from "next/font/google";
 import { Poppins } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
-import "./globals.css";
-import { ReduxProvider } from "@/lib/provider";
-import { Toaster } from "sonner";
+import { Navigation } from "@/components/layout/website/navigation";
+import { Footer } from "@/components/layout/website/footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -25,24 +22,19 @@ export const metadata: Metadata = {
   title: "EduPro - Professional Online Training Platform",
   description:
     "Unlock your potential with expert-led online training programs. Join thousands of professionals advancing their careers.",
-  generator: "v0.app",
+
 };
 
-export default function RootLayout({
+export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${inter.variable} ${poppins.variable} font-sans antialiased`}
-      >
-        <ReduxProvider>
+      <div>
+          <Navigation />
           {children}
-          <Toaster />
-        </ReduxProvider>
-      </body>
-    </html>
+          <Footer />
+      </div>
   );
 }
