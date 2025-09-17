@@ -59,7 +59,7 @@ export default function Sidebar({ isOpen, onClose }: { isOpen?: boolean; onClose
             href="/"
             className="text-2xl font-extrabold tracking-tight text-slate-900"
           >
-            Abacus
+            Dreams Startup
           </Link>
           <div className="h-1 w-3/4 rounded-full bg-gradient-to-r from-blue-500 to-purple-600" />
         </div>
